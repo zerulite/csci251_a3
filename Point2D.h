@@ -28,6 +28,8 @@ public:
 
     int setX(int x);
     int setY(int y);
+
+    friend ostream &operator<<(ostream &os, Point2D &point);
 };
 
 #endif

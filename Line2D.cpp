@@ -48,8 +48,8 @@ Point2D Line2D::setPt2(Point2D pt2)
     return pt2;
 }
 
-ostream &operator<<(ostream &os, Line2D &line)
+/* ostream &operator<<(ostream &os, Line2D &line)
 {
     os << "Line2D: " << line.getPt1() << " to " << line.getPt2() << " with length " << line.getScalarValue();
     return os;
-}
+} */

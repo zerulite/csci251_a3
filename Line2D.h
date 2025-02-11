@@ -31,6 +31,8 @@ public:
 
     Point2D setPt1(Point2D pt1);
     Point2D setPt2(Point2D pt2);
+
+    friend ostream &operator<<(ostream &os, Line2D &line);
 };
 
 #endif

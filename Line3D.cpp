@@ -48,8 +48,8 @@ Point3D Line3D::setPt2(Point3D pt2)
     return pt2;
 }
 
-ostream &operator<<(ostream &os, Line3D &line)
+/* ostream &operator<<(ostream &os, Line3D &line)
 {
     os << "Line3D: " << line.getPt1() << " to " << line.getPt2() << " with length " << line.getScalarValue();
     return os;
-}
+} */

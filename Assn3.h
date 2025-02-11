@@ -14,16 +14,17 @@
 
 using namespace std;
 
-string filterCriteria = "None";
-string sortCriteria = "None";
-string sortingOrder = "ASCENDING";
+string filterCriteria = "Point2D";
+string sortCriteria = "x-coordinate";
+string sortingOrder = "ASC";
 
 void printStartPage();
 void userStartInput();
 void returnToMain();
 void inputData();
-/* void filterData();
+void filterData();
 void sortData();
 void sortDataOrder();
-void viewData();
+/* void viewData();
 void storeData(); */
+void testPrint();

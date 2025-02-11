@@ -21,6 +21,7 @@ public:
 
     int getZ();
     int setZ(int z);
+    friend ostream &operator<<(ostream &os, Point3D &point);
 };
 
 #endif
