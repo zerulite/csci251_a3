@@ -48,8 +48,15 @@ Point3D Line3D::setPt2(Point3D pt2)
     return pt2;
 }
 
-/* ostream &operator<<(ostream &os, Line3D &line)
+ostream &operator<<(ostream &os, Line3D &line)
 {
-    os << "Line3D: " << line.getPt1() << " to " << line.getPt2() << " with length " << line.getScalarValue();
+    Point3D pt1 = line.getPt1();
+    Point3D pt2 = line.getPt2();
+
+    os << "[" << setw(4) << right << pt1.getX() << "," << setw(4) << right << pt1.getY() << "," << setw(4) << right << pt1.getZ() << "]";
+    os << setw(3) << "";
+    os << "[" << setw(4) << right << pt2.getX() << "," << setw(4) << right << pt2.getY() << "," << setw(4) << right << pt2.getZ() << "]";
+    os << setw(3) << "" << line.getScalarValue();
+
     return os;
-} */
+}

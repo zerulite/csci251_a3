@@ -114,7 +114,7 @@ void inputData()
                 line = line.substr(line.find(',') + 2);        // leftover string after x2 and comma
                 int y2 = stoi(line.substr(0, line.find(']'))); // get y2
                 // cout << x1 << " " << y1 << " " << x2 << " " << y2 << endl;
-                // Line2DVec.push_back(new Line2D(new Point2D(x1, y1), new Point2D(x2, y2)));
+                Line2DVec.push_back(new Line2D(Point2D(x1, y1), Point2D(x2, y2)));
             }
             else if (type == "Line3D")
             {
@@ -132,7 +132,7 @@ void inputData()
                 line = line.substr(line.find(',') + 2);        // leftover string after y2 and comma
                 int z2 = stoi(line.substr(0, line.find(']'))); // get z2
                 // cout << x1 << " " << y1 << " " << z1 << " " << x2 << " " << y2 << " " << z2 << endl;
-                // Line3DVec.push_back(new Line3D(Point3D(x1, y1, z1), Point3D(x2, y2, z2)));
+                Line3DVec.push_back(new Line3D(Point3D(x1, y1, z1), Point3D(x2, y2, z2)));
             }
         }
         configFile.close();
@@ -346,55 +346,63 @@ void sortDataOrder()
 
 void viewData()
 {
+    ostringstream oss;
+    oss << endl;
     if (filterCriteria == "Point2D")
     {
-        ostringstream oss;
-        oss << endl;
         oss << setw(5) << right << "X" << setw(5) << right << "Y" << setw(4) << "" << "Dist. Fr Origin" << endl;
         oss << "-----------------------------------" << endl;
         for (int i = 0; i < Point2DVec.size(); i++)
         {
             oss << *Point2DVec[i] << endl;
         }
-        cout << oss.str();
     }
     else if (filterCriteria == "Point3D")
     {
-        ostringstream oss;
-        oss << endl;
         oss << setw(5) << right << "X" << setw(5) << right << "Y" << setw(5) << right << "Z" << setw(4) << "" << "Dist. Fr Origin" << endl;
         oss << "-----------------------------------" << endl;
         for (int i = 0; i < Point3DVec.size(); i++)
         {
             oss << *Point3DVec[i] << endl;
         }
-        cout << oss.str();
     }
-    /*else if (filterCriteria == "Line2D")
+    else if (filterCriteria == "Line2D")
     {
-        cout << "Viewing Line2D data" << endl;
+        oss << setw(5) << right << "P1-X" << setw(5) << right << "P1-Y";
+        oss << setw(4) << "";
+        oss << setw(5) << right << "P2-X" << setw(5) << right << "P2-Y";
+        oss << setw(4) << "";
+        oss << "Length" << endl;
+        oss << "-----------------------------------" << endl;
         for (int i = 0; i < Line2DVec.size(); i++)
         {
-            // cout << *Line2DVec[i] << endl;
+            oss << *Line2DVec[i] << endl;
         }
     }
     else if (filterCriteria == "Line3D")
     {
-        cout << "Viewing Line3D data" << endl;
+        oss << setw(5) << right << "P1-X" << setw(5) << right << "P1-Y" << setw(5) << right << "P1-Z";
+        oss << setw(4) << "";
+        oss << setw(5) << right << "P2-X" << setw(5) << right << "P2-Y" << setw(5) << right << "P2-Z";
+        oss << setw(4) << "";
+        oss << "Length" << endl;
+        oss << "-----------------------------------" << endl;
         for (int i = 0; i < Line3DVec.size(); i++)
         {
-            // cout << *Line3DVec[i] << endl;
+            oss << *Line3DVec[i] << endl;
         }
-    } */
+    }
     else
     {
-        cout << "Invalid filter criteria" << endl;
+        oss << "Invalid filter criteria" << endl;
     }
+    cout << oss.str();
     returnToMain();
 }
 void returnToMain()
 {
-    cout << "Press <enter> to go back to main menu...";
+    cout << endl
+         << "Press <enter> to go back to main menu...";
     cin.ignore();
     cin.get();
     cout << endl;
