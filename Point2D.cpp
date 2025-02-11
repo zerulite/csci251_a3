@@ -49,6 +49,7 @@ int Point2D::setY(int y)
 
 ostream &operator<<(ostream &os, Point2D &point)
 {
-    os << "Point2D: (" << point.getX() << ", " << point.getY() << ") with distance from origin " << point.getScalarValue();
+    os << "[" << setw(4) << right << point.getX() << ", " << setw(4) << right << point.getY() << "]";
+    os << setw(3) << "" << point.getScalarValue() << endl;
     return os;
 }

@@ -33,6 +33,7 @@ int Point3D::setZ(int z)
 
 ostream &operator<<(ostream &os, Point3D &point)
 {
-    os << "Point3D: (" << point.getX() << ", " << point.getY() << ", " << point.getZ() << ") with distance from origin " << point.getScalarValue();
+    os << "[" << setw(4) << right << point.getX() << ", " << setw(4) << right << point.getY() << ", " << setw(4) << right << point.getZ() << "]";
+    os << setw(3) << "" << point.getScalarValue() << endl;
     return os;
 }

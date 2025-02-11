@@ -54,11 +54,7 @@ void userStartInput()
         storeData();
         break; */
     case 7:
-        Point2DVec.clear();
-        Point3DVec.clear();
-        Line2DVec.clear();
-        Line3DVec.clear();
-        cout << "Quitting program" << endl;
+        quitProgram();
         break;
     case 8:
         testPrint();
@@ -347,6 +343,7 @@ void sortDataOrder()
     }
     returnToMain();
 }
+
 void returnToMain()
 {
     cout << "Press <enter> to go back to main menu...";
@@ -354,6 +351,17 @@ void returnToMain()
     cin.get();
     cout << endl;
     printStartPage();
+}
+
+void quitProgram()
+{
+    cout << "Thank you for using Assn3 Program!" << endl;
+    Point2DVec.clear();
+    Point3DVec.clear();
+    Line2DVec.clear();
+    Line3DVec.clear();
+    cout << "Quitting program" << endl;
+    exit(0);
 }
 
 int main()

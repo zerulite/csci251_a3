@@ -27,4 +27,5 @@ void sortData();
 void sortDataOrder();
 /* void viewData();
 void storeData(); */
+void quitProgram();
 void testPrint();
