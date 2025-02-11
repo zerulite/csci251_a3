@@ -25,7 +25,7 @@ void inputData();
 void filterData();
 void sortData();
 void sortDataOrder();
-/* void viewData();
-void storeData(); */
+void viewData();
+// void storeData();
 void quitProgram();
 void testPrint();

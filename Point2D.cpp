@@ -49,7 +49,7 @@ int Point2D::setY(int y)
 
 ostream &operator<<(ostream &os, Point2D &point)
 {
-    os << "[" << setw(4) << right << point.getX() << ", " << setw(4) << right << point.getY() << "]";
-    os << setw(3) << "" << point.getScalarValue() << endl;
+    os << "[" << setw(4) << right << point.getX() << "," << setw(4) << right << point.getY() << "]";
+    os << setw(3) << "" << point.getScalarValue();
     return os;
 }

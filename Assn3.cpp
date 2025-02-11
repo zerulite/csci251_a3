@@ -47,10 +47,10 @@ void userStartInput()
     case 4:
         sortDataOrder();
         break;
-    /* case 5:
+    case 5:
         viewData();
         break;
-    case 6:
+    /* case 6:
         storeData();
         break; */
     case 7:
@@ -344,6 +344,54 @@ void sortDataOrder()
     returnToMain();
 }
 
+void viewData()
+{
+    if (filterCriteria == "Point2D")
+    {
+        ostringstream oss;
+        oss << endl;
+        oss << setw(5) << right << "X" << setw(5) << right << "Y" << setw(4) << "" << "Dist. Fr Origin" << endl;
+        oss << "-----------------------------------" << endl;
+        for (int i = 0; i < Point2DVec.size(); i++)
+        {
+            oss << *Point2DVec[i] << endl;
+        }
+        cout << oss.str();
+    }
+    else if (filterCriteria == "Point3D")
+    {
+        ostringstream oss;
+        oss << endl;
+        oss << setw(5) << right << "X" << setw(5) << right << "Y" << setw(5) << right << "Z" << setw(4) << "" << "Dist. Fr Origin" << endl;
+        oss << "-----------------------------------" << endl;
+        for (int i = 0; i < Point3DVec.size(); i++)
+        {
+            oss << *Point3DVec[i] << endl;
+        }
+        cout << oss.str();
+    }
+    /*else if (filterCriteria == "Line2D")
+    {
+        cout << "Viewing Line2D data" << endl;
+        for (int i = 0; i < Line2DVec.size(); i++)
+        {
+            // cout << *Line2DVec[i] << endl;
+        }
+    }
+    else if (filterCriteria == "Line3D")
+    {
+        cout << "Viewing Line3D data" << endl;
+        for (int i = 0; i < Line3DVec.size(); i++)
+        {
+            // cout << *Line3DVec[i] << endl;
+        }
+    } */
+    else
+    {
+        cout << "Invalid filter criteria" << endl;
+    }
+    returnToMain();
+}
 void returnToMain()
 {
     cout << "Press <enter> to go back to main menu...";
