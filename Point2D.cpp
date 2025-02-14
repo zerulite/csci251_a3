@@ -47,6 +47,7 @@ int Point2D::setY(int y)
     return y;
 }
 
+// output stream operator
 ostream &operator<<(ostream &os, Point2D &point)
 {
     os << "[" << setw(4) << right << point.getX() << "," << setw(4) << right << point.getY() << "]";

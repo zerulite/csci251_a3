@@ -28,7 +28,7 @@ public:
 
     Point2D getPt1() const;
     Point2D getPt2() const;
-    double getScalarValue();
+    double getScalarValue() const;
 
     Point2D setPt1(Point2D pt1);
     Point2D setPt2(Point2D pt2);

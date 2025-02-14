@@ -33,10 +33,10 @@ void userStartInput()
         inputData();
         break;
     case 2:
-        filterData();
+        filterDataCriteria();
         break;
     case 3:
-        sortData();
+        sortDataCriteria();
         break;
     case 4:
         sortDataOrder();
@@ -59,6 +59,8 @@ void userStartInput()
     }
 }
 
+// function to input data from an external text file
+// function checks if data is duplicate before adding to vector
 void inputData()
 {
     string fileName;
@@ -236,7 +238,8 @@ void inputData()
     returnToMain();
 }
 
-void filterData()
+// function prompts user to set filter criteria, then stores criteria in variable
+void filterDataCriteriaCriteria()
 {
     string input;
     cout << "[ Specifying filtering criteria (current: " << filterCriteria << ") ]" << endl
@@ -277,12 +280,13 @@ void filterData()
         cout << "Invalid input, please try again" << endl;
         cin.clear();
         cin.ignore();
-        filterData();
+        filterDataCriteria(); // recursive call to filterDataCriteria if invalid input
     }
     returnToMain();
 }
 
-void sortData()
+// function prompts user to set sorting criteria, then stores criteria in variable
+void sortDataCriteria()
 {
     string input;
     if (filterCriteria == "Point2D")
@@ -315,7 +319,7 @@ void sortData()
             cout << "Invalid input, please try again" << endl;
             cin.clear();
             cin.ignore();
-            sortData();
+            sortDataCriteria();
         }
     }
     else if (filterCriteria == "Point3D")
@@ -354,7 +358,7 @@ void sortData()
             cout << "Invalid input, please try again" << endl;
             cin.clear();
             cin.ignore();
-            sortData();
+            sortDataCriteria();
         }
     }
     else if (filterCriteria == "Line2D" || filterCriteria == "Line3D")
@@ -387,12 +391,13 @@ void sortData()
             cout << "Invalid input, please try again" << endl;
             cin.clear();
             cin.ignore();
-            sortData();
+            sortDataCriteria();
         }
     }
     returnToMain();
 }
 
+// function prompts user to set sorting order (by either ascending or descending)w, then stores order in variable
 void sortDataOrder()
 {
     string input;
@@ -423,15 +428,24 @@ void sortDataOrder()
     returnToMain();
 }
 
+/*
+function outputs data based on filter criteria, sorting criteria and sorting order
+logic for sorting is done here
+stores data into a string for output, for both console and file output
+ */
 void viewData()
 {
     ostringstream oss;
+    fileOutputString = ""; //  clear fileOutputString
+    cout << endl;
+    oss << "Filteriing Criteria : " << filterCriteria << endl;
+    oss << "Sorting Criteria : " << sortCriteria << endl;
+    oss << "Sorting Order : " << sortingOrder << endl;
     oss << endl;
     if (filterCriteria == "Point2D")
     {
         oss << setw(5) << right << "X" << setw(5) << right << "Y" << setw(4) << "" << "Dist. Fr Origin" << endl;
         oss << "-----------------------------------" << endl;
-
         if (sortCriteria == "x-coordinate")
         {
             if (sortingOrder == "ASC")
@@ -547,6 +561,7 @@ void viewData()
         oss << "-----------------------------------" << endl;
         if (sortCriteria == "Pt. 1")
         {
+            // sort by y, then x
             if (sortingOrder == "ASC")
             {
                 sort(Line2DVec.begin(), Line2DVec.end(), [](Line2D *a, Line2D *b)
@@ -564,6 +579,7 @@ void viewData()
         }
         else if (sortCriteria == "Pt. 2")
         {
+            // sort by y, then x
             if (sortingOrder == "ASC")
             {
                 sort(Line2DVec.begin(), Line2DVec.end(), [](Line2D *a, Line2D *b)
@@ -607,6 +623,7 @@ void viewData()
         oss << "-----------------------------------" << endl;
         if (sortCriteria == "Pt. 1")
         {
+            // sort by z, y then x
             if (sortingOrder == "ASC")
             {
                 sort(Line3DVec.begin(), Line3DVec.end(), [](Line3D *a, Line3D *b)
@@ -628,6 +645,7 @@ void viewData()
         }
         else if (sortCriteria == "Pt. 2")
         {
+            // sort by z, y, then x
             if (sortingOrder == "ASC")
             {
                 sort(Line3DVec.begin(), Line3DVec.end(), [](Line3D *a, Line3D *b)
@@ -674,6 +692,7 @@ void viewData()
     returnToMain();
 }
 
+// function stores output data into external text file
 void storeData()
 {
     int vectorsize;
@@ -722,6 +741,7 @@ void returnToMain()
     printStartPage();
 }
 
+// function clears vectors, then exits program
 void quitProgram()
 {
     cout << "Thank you for using Assn3 Program!" << endl;

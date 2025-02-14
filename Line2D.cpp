@@ -29,7 +29,7 @@ Point2D Line2D::getPt2() const
     return pt2;
 }
 
-double Line2D::getScalarValue()
+double Line2D::getScalarValue() const
 {
     return length;
 }
@@ -48,6 +48,7 @@ Point2D Line2D::setPt2(Point2D pt2)
     return pt2;
 }
 
+// output stream operator
 ostream &operator<<(ostream &os, Line2D &line)
 {
     Point2D pt1 = line.getPt1();

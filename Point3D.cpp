@@ -31,6 +31,7 @@ int Point3D::setZ(int z)
     return z;
 }
 
+// output stream operator
 ostream &operator<<(ostream &os, Point3D &point)
 {
     os << "[" << setw(4) << right << point.getX() << "," << setw(4) << right << point.getY() << "," << setw(4) << right << point.getZ() << "]";

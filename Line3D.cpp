@@ -14,8 +14,8 @@ Line3D::~Line3D()
 
 void Line3D::setLength()
 {
+    // calculate length of line
     double length = sqrt(pow(pt1.getX() - pt2.getX(), 2) + pow(pt1.getY() - pt2.getY(), 2) + pow(pt1.getZ() - pt2.getZ(), 2));
-
     this->length = length;
 }
 
@@ -48,6 +48,7 @@ Point3D Line3D::setPt2(Point3D pt2)
     return pt2;
 }
 
+// output stream operator
 ostream &operator<<(ostream &os, Line3D &line)
 {
     Point3D pt1 = line.getPt1();
