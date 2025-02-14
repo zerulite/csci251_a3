@@ -20,6 +20,12 @@ string sortCriteria = "x-coordinate";
 string sortingOrder = "ASC";
 string fileOutputString;
 
+// to store points and lines
+vector<Point2D *> Point2DVec{};
+vector<Point3D *> Point3DVec{};
+vector<Line2D *> Line2DVec{};
+vector<Line3D *> Line3DVec{};
+
 void printStartPage();
 void userStartInput();
 void returnToMain();

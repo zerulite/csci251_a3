@@ -2,12 +2,6 @@
 
 using namespace std;
 
-// to store points and lines
-vector<Point2D *> Point2DVec{};
-vector<Point3D *> Point3DVec{};
-vector<Line2D *> Line2DVec{};
-vector<Line3D *> Line3DVec{};
-
 // prints start page
 void printStartPage()
 {
@@ -75,29 +69,27 @@ void inputData()
     ifstream configFile; // input file stream var
     configFile.open(fileName.c_str());
 
-    // to add if line is not empty here
     if (configFile.is_open())
     {
         while (getline(configFile, line))
         {
-            if (line.size() != 0)
+            if (line.size() != 0) // if line is not empty
             {
-                string type = line.substr(0, line.find(',')); // get the type of data
+                string type = line.substr(0, line.find(',')); // get the type of data (which class)
                 if (type == "Point2D")
                 {
-                    line = line.substr(line.find('[') + 1); // leftover string after Point2D
-                    int x = stoi(line);                     // get x;
-                    line = line.substr(line.find(',') + 2); // leftover string after x and comma
-                    int y = stoi(line.substr(0, line.find(']')));
-                    // cout << x << " " << y << endl;
+                    line = line.substr(line.find('[') + 1);       // leftover string after Point2D
+                    int x = stoi(line);                           // get x;
+                    line = line.substr(line.find(',') + 2);       // leftover string after x and comma
+                    int y = stoi(line.substr(0, line.find(']'))); // get y
 
-                    Point2D *tempPoint2D = new Point2D(x, y);
-                    if (Point2DVec.empty())
+                    Point2D *tempPoint2D = new Point2D(x, y); // temp Point2D object
+                    if (Point2DVec.empty())                   // first element
                     {
                         Point2DVec.push_back(tempPoint2D);
                     }
                     else
-                    {
+                    { // check if the point already exists in the vector
                         bool exists = false;
                         for (int i = 0; i < Point2DVec.size(); i++)
                         {
@@ -125,16 +117,14 @@ void inputData()
                     int y = stoi(line.substr(0, line.find(','))); // get y
                     line = line.substr(line.find(',') + 2);       // leftover string after y and comma
                     int z = stoi(line.substr(0, line.find(']'))); // get z
-                    // cout << x << " " << y << " " << z << endl;
-                    Point3DVec.push_back(new Point3D(x, y, z));
 
-                    Point3D *tempPoint3D = new Point3D(x, y, z);
-                    if (Point3DVec.empty())
+                    Point3D *tempPoint3D = new Point3D(x, y, z); // temp Point3D object
+                    if (Point3DVec.empty())                      // first element
                     {
                         Point3DVec.push_back(tempPoint3D);
                     }
                     else
-                    {
+                    { // check if the point already exists in the vector
                         bool exists = false;
                         for (int i = 0; i < Point3DVec.size(); i++)
                         {
@@ -156,22 +146,23 @@ void inputData()
                 }
                 else if (type == "Line2D")
                 {
-                    line = line.substr(line.find('[') + 1); // leftover string after Line2D
-                    int x1 = stoi(line);                    // get x1;
-                    line = line.substr(line.find(',') + 2); // leftover string after x1 and comma
-                    int y1 = stoi(line.substr(0, line.find(']')));
+                    line = line.substr(line.find('[') + 1);        // leftover string after Line2D
+                    int x1 = stoi(line);                           // get x1
+                    line = line.substr(line.find(',') + 2);        // leftover string after x1 and comma
+                    int y1 = stoi(line.substr(0, line.find(']'))); // get y1
+
                     line = line.substr(line.find('[') + 1);        // leftover string after y1 and comma
                     int x2 = stoi(line.substr(0, line.find(','))); // get x2
                     line = line.substr(line.find(',') + 2);        // leftover string after x2 and comma
                     int y2 = stoi(line.substr(0, line.find(']'))); // get y2
-                    // cout << x1 << " " << y1 << " " << x2 << " " << y2 << endl;
-                    Line2D *tempLine2D = new Line2D(Point2D(x1, y1), Point2D(x2, y2));
-                    if (Line2DVec.empty())
+
+                    Line2D *tempLine2D = new Line2D(Point2D(x1, y1), Point2D(x2, y2)); // temp Line2D object
+                    if (Line2DVec.empty())                                             // first element
                     {
                         Line2DVec.push_back(tempLine2D);
                     }
                     else
-                    {
+                    { // check if the line already exists in the vector
                         bool exists = false;
                         for (int i = 0; i < Line2DVec.size(); i++)
                         {
@@ -194,7 +185,7 @@ void inputData()
                 else if (type == "Line3D")
                 {
                     line = line.substr(line.find('[') + 1);        // leftover string after Line3D
-                    int x1 = stoi(line);                           // get x1;
+                    int x1 = stoi(line);                           // get x1
                     line = line.substr(line.find(',') + 2);        // leftover string after x1 and comma
                     int y1 = stoi(line.substr(0, line.find(','))); // get y1
                     line = line.substr(line.find(',') + 2);        // leftover string after y1 and comma
@@ -208,13 +199,13 @@ void inputData()
                     int z2 = stoi(line.substr(0, line.find(']'))); // get z2
                     // cout << x1 << " " << y1 << " " << z1 << " " << x2 << " " << y2 << " " << z2 << endl;
 
-                    Line3D *tempLine3D = new Line3D(Point3D(x1, y1, z1), Point3D(x2, y2, z2));
-                    if (Line3DVec.empty())
+                    Line3D *tempLine3D = new Line3D(Point3D(x1, y1, z1), Point3D(x2, y2, z2)); // temp Line3D object
+                    if (Line3DVec.empty())                                                     // first element
                     {
                         Line3DVec.push_back(tempLine3D);
                     }
                     else
-                    {
+                    { // check if the line already exists in the vector
                         bool exists = false;
                         for (int i = 0; i < Line3DVec.size(); i++)
                         {
