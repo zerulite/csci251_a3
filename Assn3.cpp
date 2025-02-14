@@ -239,7 +239,7 @@ void inputData()
 }
 
 // function prompts user to set filter criteria, then stores criteria in variable
-void filterDataCriteriaCriteria()
+void filterDataCriteria()
 {
     string input;
     cout << "[ Specifying filtering criteria (current: " << filterCriteria << ") ]" << endl
@@ -438,7 +438,7 @@ void viewData()
     ostringstream oss;
     fileOutputString = ""; //  clear fileOutputString
     cout << endl;
-    oss << "Filteriing Criteria : " << filterCriteria << endl;
+    oss << "Filtering Criteria : " << filterCriteria << endl;
     oss << "Sorting Criteria : " << sortCriteria << endl;
     oss << "Sorting Order : " << sortingOrder << endl;
     oss << endl;
