@@ -67,12 +67,6 @@ void userStartInput()
     }
 }
 
-template <typename T>
-bool equals(const T &a, const T &b)
-{
-    return a == b;
-}
-
 void inputData()
 {
     string fileName;
@@ -109,16 +103,12 @@ void inputData()
                         {
                             Point2DVec.push_back(tempPoint2D);
                         }
-                        else
-                        {
-                            cout << "Point2D already exists" << endl;
-                        }
                     }
                 }
+                delete tempPoint2D;
             }
             else if (type == "Point3D")
             {
-
                 line = line.substr(line.find('[') + 1);       // leftover string after Point3D
                 int x = stoi(line);                           // get x;
                 line = line.substr(line.find(',') + 2);       // leftover string after x and comma
@@ -127,6 +117,23 @@ void inputData()
                 int z = stoi(line.substr(0, line.find(']'))); // get z
                 // cout << x << " " << y << " " << z << endl;
                 Point3DVec.push_back(new Point3D(x, y, z));
+
+                Point3D *tempPoint3D = new Point3D(x, y, z);
+                if (Point3DVec.empty())
+                {
+                    Point3DVec.push_back(tempPoint3D);
+                }
+                else
+                {
+                    for (int i = 0; i < Point3DVec.size(); i++)
+                    {
+                        if (equals(Point3DVec[i], tempPoint3D))
+                        {
+                            Point3DVec.push_back(tempPoint3D);
+                        }
+                    }
+                }
+                delete tempPoint3D;
             }
             else if (type == "Line2D")
             {
@@ -139,7 +146,23 @@ void inputData()
                 line = line.substr(line.find(',') + 2);        // leftover string after x2 and comma
                 int y2 = stoi(line.substr(0, line.find(']'))); // get y2
                 // cout << x1 << " " << y1 << " " << x2 << " " << y2 << endl;
-                Line2DVec.push_back(new Line2D(Point2D(x1, y1), Point2D(x2, y2)));
+
+                Line2D *tempLine2D = new Line2D(Point2D(x1, y1), Point2D(x2, y2));
+                if (Line2DVec.empty())
+                {
+                    Line2DVec.push_back(tempLine2D);
+                }
+                else
+                {
+                    for (int i = 0; i < Line2DVec.size(); i++)
+                    {
+                        if (equals(Line2DVec[i], tempLine2D))
+                        {
+                            Line2DVec.push_back(tempLine2D);
+                        }
+                    }
+                }
+                delete tempLine2D;
             }
             else if (type == "Line3D")
             {
@@ -157,7 +180,23 @@ void inputData()
                 line = line.substr(line.find(',') + 2);        // leftover string after y2 and comma
                 int z2 = stoi(line.substr(0, line.find(']'))); // get z2
                 // cout << x1 << " " << y1 << " " << z1 << " " << x2 << " " << y2 << " " << z2 << endl;
-                Line3DVec.push_back(new Line3D(Point3D(x1, y1, z1), Point3D(x2, y2, z2)));
+
+                Line3D *tempLine3D = new Line3D(Point3D(x1, y1, z1), Point3D(x2, y2, z2));
+                if (Line3DVec.empty())
+                {
+                    Line3DVec.push_back(tempLine3D);
+                }
+                else
+                {
+                    for (int i = 0; i < Line3DVec.size(); i++)
+                    {
+                        if (equals(Line3DVec[i], tempLine3D))
+                        {
+                            Line3DVec.push_back(tempLine3D);
+                        }
+                    }
+                }
+                delete tempLine3D;
             }
         }
         configFile.close();

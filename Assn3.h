@@ -7,10 +7,11 @@
 #include <fstream>
 #include <cmath>
 
-#include "Point2D.h" // Point2D class
-#include "Point3D.h" // Point3D class
-#include "Line2D.h"  // Line2D class
-#include "Line3D.h"  // Line3D class
+#include "Point2D.h"     // Point2D class
+#include "Point3D.h"     // Point3D class
+#include "Line2D.h"      // Line2D class
+#include "Line3D.h"      // Line3D class
+#include "MyTemplates.h" // template function file
 
 using namespace std;
 

@@ -60,3 +60,8 @@ ostream &operator<<(ostream &os, Line3D &line)
 
     return os;
 }
+
+bool operator==(Line3D &a, Line3D &b)
+{
+    return a.getPt1() == b.getPt1() && a.getPt2() == b.getPt2();
+}

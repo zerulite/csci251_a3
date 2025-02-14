@@ -37,3 +37,8 @@ ostream &operator<<(ostream &os, Point3D &point)
     os << setw(3) << "" << point.getScalarValue();
     return os;
 }
+
+bool operator==(Point3D &a, Point3D &b)
+{
+    return a.getX() == b.getX() && a.getY() == b.getY() && a.getZ() == b.getZ();
+}
