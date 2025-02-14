@@ -442,6 +442,8 @@ void viewData()
     oss << "Sorting Criteria : " << sortCriteria << endl;
     oss << "Sorting Order : " << sortingOrder << endl;
     oss << endl;
+
+    // sort based on filter criteria, then outputs into oss
     if (filterCriteria == "Point2D")
     {
         oss << setw(5) << right << "X" << setw(5) << right << "Y" << setw(4) << "" << "Dist. Fr Origin" << endl;
