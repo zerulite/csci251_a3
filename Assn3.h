@@ -30,3 +30,5 @@ void viewData();
 // void storeData();
 void quitProgram();
 void testPrint();
+void sortByAscendingX();
+void sortByDescendingX();

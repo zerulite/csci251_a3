@@ -23,9 +23,11 @@ public:
     Point3D(int x, int y, int z);
     ~Point3D();
 
-    int getZ();
+    int getZ() const;
     int setZ(int z);
+
     friend ostream &operator<<(ostream &os, Point3D &point);
+    bool operator==(const Point3D &other) const;
 };
 
 #endif

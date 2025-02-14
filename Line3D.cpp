@@ -19,12 +19,12 @@ void Line3D::setLength()
     this->length = length;
 }
 
-Point3D Line3D::getPt1()
+Point3D Line3D::getPt1() const
 {
     return pt1;
 }
 
-Point3D Line3D::getPt2()
+Point3D Line3D::getPt2() const
 {
     return pt2;
 }
@@ -61,7 +61,7 @@ ostream &operator<<(ostream &os, Line3D &line)
     return os;
 }
 
-bool operator==(Line3D &a, Line3D &b)
+bool Line3D::operator==(const Line3D &other) const
 {
-    return a.getPt1() == b.getPt1() && a.getPt2() == b.getPt2();
+    return this->getPt1() == other.getPt1() && this->getPt2() == other.getPt2();
 }

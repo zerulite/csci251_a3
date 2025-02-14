@@ -19,12 +19,12 @@ void Line2D::setLength()
     this->length = length;
 }
 
-Point2D Line2D::getPt1()
+Point2D Line2D::getPt1() const
 {
     return pt1;
 }
 
-Point2D Line2D::getPt2()
+Point2D Line2D::getPt2() const
 {
     return pt2;
 }
@@ -61,7 +61,7 @@ ostream &operator<<(ostream &os, Line2D &line)
     return os;
 }
 
-bool operator==(Line2D &a, Line2D &b)
+bool Line2D::operator==(const Line2D &other) const
 {
-    return a.getPt1() == b.getPt1() && a.getPt2() == b.getPt2();
+    return this->getPt1() == other.getPt1() && this->getPt2() == other.getPt2();
 }

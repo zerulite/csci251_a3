@@ -23,14 +23,15 @@ public:
     Point2D(int x, int y);
     ~Point2D();
 
-    int getX();
-    int getY();
-    double getScalarValue();
+    int getX() const;
+    int getY() const;
+    double getScalarValue() const;
 
     int setX(int x);
     int setY(int y);
 
     friend ostream &operator<<(ostream &os, Point2D &point);
+    bool operator==(const Point2D &other) const;
 };
 
 #endif

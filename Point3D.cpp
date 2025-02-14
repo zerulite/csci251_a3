@@ -12,7 +12,7 @@ Point3D::~Point3D()
 {
 }
 
-int Point3D::getZ()
+int Point3D::getZ() const
 {
     return z;
 }
@@ -38,7 +38,7 @@ ostream &operator<<(ostream &os, Point3D &point)
     return os;
 }
 
-bool operator==(Point3D &a, Point3D &b)
+bool Point3D::operator==(const Point3D &other) const
 {
-    return a.getX() == b.getX() && a.getY() == b.getY() && a.getZ() == b.getZ();
+    return this->getX() == other.getX() && this->getY() == other.getY() && this->getZ() == other.getZ();
 }

@@ -77,6 +77,7 @@ void inputData()
     ifstream configFile; // input file stream var
     configFile.open(fileName.c_str());
 
+    // to add if line is not empty here
     if (configFile.is_open())
     {
         while (getline(configFile, line))
@@ -97,15 +98,24 @@ void inputData()
                 }
                 else
                 {
+                    bool exists = false;
                     for (int i = 0; i < Point2DVec.size(); i++)
                     {
-                        if (equals(Point2DVec[i], tempPoint2D))
+                        if (equals(*Point2DVec[i], *tempPoint2D))
                         {
-                            Point2DVec.push_back(tempPoint2D);
+                            exists = true;
+                            break;
                         }
                     }
+                    if (!exists)
+                    {
+                        Point2DVec.push_back(tempPoint2D);
+                    }
+                    else
+                    {
+                        delete tempPoint2D;
+                    }
                 }
-                delete tempPoint2D;
             }
             else if (type == "Point3D")
             {
@@ -125,15 +135,24 @@ void inputData()
                 }
                 else
                 {
+                    bool exists = false;
                     for (int i = 0; i < Point3DVec.size(); i++)
                     {
-                        if (equals(Point3DVec[i], tempPoint3D))
+                        if (*Point3DVec[i] == *tempPoint3D)
                         {
-                            Point3DVec.push_back(tempPoint3D);
+                            exists = true;
+                            break;
                         }
                     }
+                    if (!exists)
+                    {
+                        Point3DVec.push_back(tempPoint3D);
+                    }
+                    else
+                    {
+                        delete tempPoint3D;
+                    }
                 }
-                delete tempPoint3D;
             }
             else if (type == "Line2D")
             {
@@ -146,7 +165,6 @@ void inputData()
                 line = line.substr(line.find(',') + 2);        // leftover string after x2 and comma
                 int y2 = stoi(line.substr(0, line.find(']'))); // get y2
                 // cout << x1 << " " << y1 << " " << x2 << " " << y2 << endl;
-
                 Line2D *tempLine2D = new Line2D(Point2D(x1, y1), Point2D(x2, y2));
                 if (Line2DVec.empty())
                 {
@@ -154,15 +172,24 @@ void inputData()
                 }
                 else
                 {
+                    bool exists = false;
                     for (int i = 0; i < Line2DVec.size(); i++)
                     {
-                        if (equals(Line2DVec[i], tempLine2D))
+                        if (equals(*Line2DVec[i], *tempLine2D))
                         {
-                            Line2DVec.push_back(tempLine2D);
+                            exists = true;
+                            break;
                         }
                     }
+                    if (!exists)
+                    {
+                        Line2DVec.push_back(tempLine2D);
+                    }
+                    else
+                    {
+                        delete tempLine2D;
+                    }
                 }
-                delete tempLine2D;
             }
             else if (type == "Line3D")
             {
@@ -188,15 +215,24 @@ void inputData()
                 }
                 else
                 {
+                    bool exists = false;
                     for (int i = 0; i < Line3DVec.size(); i++)
                     {
-                        if (equals(Line3DVec[i], tempLine3D))
+                        if (equals(*Line3DVec[i], *tempLine3D))
                         {
-                            Line3DVec.push_back(tempLine3D);
+                            exists = true;
+                            break;
                         }
                     }
+                    if (!exists)
+                    {
+                        Line3DVec.push_back(tempLine3D);
+                    }
+                    else
+                    {
+                        delete tempLine3D;
+                    }
                 }
-                delete tempLine3D;
             }
         }
         configFile.close();
@@ -416,6 +452,14 @@ void viewData()
     {
         oss << setw(5) << right << "X" << setw(5) << right << "Y" << setw(4) << "" << "Dist. Fr Origin" << endl;
         oss << "-----------------------------------" << endl;
+        /* if (sortingOrder == "ASC")
+        {
+            sortByAscendingX();
+        }
+        else if (sortingOrder == "DSC")
+        {
+            sortByDescendingX();
+        } */
         for (int i = 0; i < Point2DVec.size(); i++)
         {
             oss << *Point2DVec[i] << endl;
@@ -463,6 +507,7 @@ void viewData()
     cout << oss.str();
     returnToMain();
 }
+
 void returnToMain()
 {
     cout << endl
@@ -483,6 +528,17 @@ void quitProgram()
     cout << "Quitting program" << endl;
     exit(0);
 }
+
+/* void sortByDescendingX()
+{
+    sort(Point2DVec.begin(), Point2DVec.end(), [](Point2D *a, Point2D *b)
+         { return a->getX() > b->getX(); });
+}
+void sortByAscendingX()
+{
+    sort(Point2DVec.begin(), Point2DVec.end(), [](Point2D *a, Point2D *b)
+         { return a->getX() < b->getX(); });
+} */
 
 int main()
 {

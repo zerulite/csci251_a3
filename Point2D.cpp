@@ -18,17 +18,17 @@ void Point2D::setDistFrOrigin()
     this->distFrOrigin = distFrOrigin;
 }
 
-int Point2D::getX()
+int Point2D::getX() const
 {
     return x;
 }
 
-int Point2D::getY()
+int Point2D::getY() const
 {
     return y;
 }
 
-double Point2D::getScalarValue()
+double Point2D::getScalarValue() const
 {
     return distFrOrigin;
 }
@@ -54,7 +54,7 @@ ostream &operator<<(ostream &os, Point2D &point)
     return os;
 }
 
-bool operator==(Point2D &a, Point2D &b)
+bool Point2D::operator==(const Point2D &other) const
 {
-    return a.getX() == b.getX() && a.getY() == b.getY();
+    return this->getX() == other.getX() && this->getY() == other.getY();
 }
