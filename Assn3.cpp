@@ -56,8 +56,6 @@ void userStartInput()
     case 7:
         quitProgram();
         break;
-    case 8:
-        testPrint();
     default:
         cout << "Invalid input, please try again" << endl;
         cin.clear();
@@ -82,155 +80,158 @@ void inputData()
     {
         while (getline(configFile, line))
         {
-            string type = line.substr(0, line.find(',')); // get the type of data
-            if (type == "Point2D")
+            if (line.size() != 0)
             {
-                line = line.substr(line.find('[') + 1); // leftover string after Point2D
-                int x = stoi(line);                     // get x;
-                line = line.substr(line.find(',') + 2); // leftover string after x and comma
-                int y = stoi(line.substr(0, line.find(']')));
-                // cout << x << " " << y << endl;
+                string type = line.substr(0, line.find(',')); // get the type of data
+                if (type == "Point2D")
+                {
+                    line = line.substr(line.find('[') + 1); // leftover string after Point2D
+                    int x = stoi(line);                     // get x;
+                    line = line.substr(line.find(',') + 2); // leftover string after x and comma
+                    int y = stoi(line.substr(0, line.find(']')));
+                    // cout << x << " " << y << endl;
 
-                Point2D *tempPoint2D = new Point2D(x, y);
-                if (Point2DVec.empty())
-                {
-                    Point2DVec.push_back(tempPoint2D);
-                }
-                else
-                {
-                    bool exists = false;
-                    for (int i = 0; i < Point2DVec.size(); i++)
-                    {
-                        if (equals(*Point2DVec[i], *tempPoint2D))
-                        {
-                            exists = true;
-                            break;
-                        }
-                    }
-                    if (!exists)
+                    Point2D *tempPoint2D = new Point2D(x, y);
+                    if (Point2DVec.empty())
                     {
                         Point2DVec.push_back(tempPoint2D);
                     }
                     else
                     {
-                        delete tempPoint2D;
-                    }
-                }
-            }
-            else if (type == "Point3D")
-            {
-                line = line.substr(line.find('[') + 1);       // leftover string after Point3D
-                int x = stoi(line);                           // get x;
-                line = line.substr(line.find(',') + 2);       // leftover string after x and comma
-                int y = stoi(line.substr(0, line.find(','))); // get y
-                line = line.substr(line.find(',') + 2);       // leftover string after y and comma
-                int z = stoi(line.substr(0, line.find(']'))); // get z
-                // cout << x << " " << y << " " << z << endl;
-                Point3DVec.push_back(new Point3D(x, y, z));
-
-                Point3D *tempPoint3D = new Point3D(x, y, z);
-                if (Point3DVec.empty())
-                {
-                    Point3DVec.push_back(tempPoint3D);
-                }
-                else
-                {
-                    bool exists = false;
-                    for (int i = 0; i < Point3DVec.size(); i++)
-                    {
-                        if (*Point3DVec[i] == *tempPoint3D)
+                        bool exists = false;
+                        for (int i = 0; i < Point2DVec.size(); i++)
                         {
-                            exists = true;
-                            break;
+                            if (equals(*Point2DVec[i], *tempPoint2D))
+                            {
+                                exists = true;
+                                break;
+                            }
+                        }
+                        if (!exists)
+                        {
+                            Point2DVec.push_back(tempPoint2D);
+                        }
+                        else
+                        {
+                            delete tempPoint2D;
                         }
                     }
-                    if (!exists)
+                }
+                else if (type == "Point3D")
+                {
+                    line = line.substr(line.find('[') + 1);       // leftover string after Point3D
+                    int x = stoi(line);                           // get x;
+                    line = line.substr(line.find(',') + 2);       // leftover string after x and comma
+                    int y = stoi(line.substr(0, line.find(','))); // get y
+                    line = line.substr(line.find(',') + 2);       // leftover string after y and comma
+                    int z = stoi(line.substr(0, line.find(']'))); // get z
+                    // cout << x << " " << y << " " << z << endl;
+                    Point3DVec.push_back(new Point3D(x, y, z));
+
+                    Point3D *tempPoint3D = new Point3D(x, y, z);
+                    if (Point3DVec.empty())
                     {
                         Point3DVec.push_back(tempPoint3D);
                     }
                     else
                     {
-                        delete tempPoint3D;
-                    }
-                }
-            }
-            else if (type == "Line2D")
-            {
-                line = line.substr(line.find('[') + 1); // leftover string after Line2D
-                int x1 = stoi(line);                    // get x1;
-                line = line.substr(line.find(',') + 2); // leftover string after x1 and comma
-                int y1 = stoi(line.substr(0, line.find(']')));
-                line = line.substr(line.find('[') + 1);        // leftover string after y1 and comma
-                int x2 = stoi(line.substr(0, line.find(','))); // get x2
-                line = line.substr(line.find(',') + 2);        // leftover string after x2 and comma
-                int y2 = stoi(line.substr(0, line.find(']'))); // get y2
-                // cout << x1 << " " << y1 << " " << x2 << " " << y2 << endl;
-                Line2D *tempLine2D = new Line2D(Point2D(x1, y1), Point2D(x2, y2));
-                if (Line2DVec.empty())
-                {
-                    Line2DVec.push_back(tempLine2D);
-                }
-                else
-                {
-                    bool exists = false;
-                    for (int i = 0; i < Line2DVec.size(); i++)
-                    {
-                        if (equals(*Line2DVec[i], *tempLine2D))
+                        bool exists = false;
+                        for (int i = 0; i < Point3DVec.size(); i++)
                         {
-                            exists = true;
-                            break;
+                            if (*Point3DVec[i] == *tempPoint3D)
+                            {
+                                exists = true;
+                                break;
+                            }
+                        }
+                        if (!exists)
+                        {
+                            Point3DVec.push_back(tempPoint3D);
+                        }
+                        else
+                        {
+                            delete tempPoint3D;
                         }
                     }
-                    if (!exists)
+                }
+                else if (type == "Line2D")
+                {
+                    line = line.substr(line.find('[') + 1); // leftover string after Line2D
+                    int x1 = stoi(line);                    // get x1;
+                    line = line.substr(line.find(',') + 2); // leftover string after x1 and comma
+                    int y1 = stoi(line.substr(0, line.find(']')));
+                    line = line.substr(line.find('[') + 1);        // leftover string after y1 and comma
+                    int x2 = stoi(line.substr(0, line.find(','))); // get x2
+                    line = line.substr(line.find(',') + 2);        // leftover string after x2 and comma
+                    int y2 = stoi(line.substr(0, line.find(']'))); // get y2
+                    // cout << x1 << " " << y1 << " " << x2 << " " << y2 << endl;
+                    Line2D *tempLine2D = new Line2D(Point2D(x1, y1), Point2D(x2, y2));
+                    if (Line2DVec.empty())
                     {
                         Line2DVec.push_back(tempLine2D);
                     }
                     else
                     {
-                        delete tempLine2D;
-                    }
-                }
-            }
-            else if (type == "Line3D")
-            {
-                line = line.substr(line.find('[') + 1);        // leftover string after Line3D
-                int x1 = stoi(line);                           // get x1;
-                line = line.substr(line.find(',') + 2);        // leftover string after x1 and comma
-                int y1 = stoi(line.substr(0, line.find(','))); // get y1
-                line = line.substr(line.find(',') + 2);        // leftover string after y1 and comma
-                int z1 = stoi(line.substr(0, line.find(']'))); // get z1
-
-                line = line.substr(line.find('[') + 1);        // leftover string after z1 and comma
-                int x2 = stoi(line.substr(0, line.find(','))); // get x2
-                line = line.substr(line.find(',') + 2);        // leftover string after x2 and comma
-                int y2 = stoi(line.substr(0, line.find(','))); // get y2
-                line = line.substr(line.find(',') + 2);        // leftover string after y2 and comma
-                int z2 = stoi(line.substr(0, line.find(']'))); // get z2
-                // cout << x1 << " " << y1 << " " << z1 << " " << x2 << " " << y2 << " " << z2 << endl;
-
-                Line3D *tempLine3D = new Line3D(Point3D(x1, y1, z1), Point3D(x2, y2, z2));
-                if (Line3DVec.empty())
-                {
-                    Line3DVec.push_back(tempLine3D);
-                }
-                else
-                {
-                    bool exists = false;
-                    for (int i = 0; i < Line3DVec.size(); i++)
-                    {
-                        if (equals(*Line3DVec[i], *tempLine3D))
+                        bool exists = false;
+                        for (int i = 0; i < Line2DVec.size(); i++)
                         {
-                            exists = true;
-                            break;
+                            if (equals(*Line2DVec[i], *tempLine2D))
+                            {
+                                exists = true;
+                                break;
+                            }
+                        }
+                        if (!exists)
+                        {
+                            Line2DVec.push_back(tempLine2D);
+                        }
+                        else
+                        {
+                            delete tempLine2D;
                         }
                     }
-                    if (!exists)
+                }
+                else if (type == "Line3D")
+                {
+                    line = line.substr(line.find('[') + 1);        // leftover string after Line3D
+                    int x1 = stoi(line);                           // get x1;
+                    line = line.substr(line.find(',') + 2);        // leftover string after x1 and comma
+                    int y1 = stoi(line.substr(0, line.find(','))); // get y1
+                    line = line.substr(line.find(',') + 2);        // leftover string after y1 and comma
+                    int z1 = stoi(line.substr(0, line.find(']'))); // get z1
+
+                    line = line.substr(line.find('[') + 1);        // leftover string after z1 and comma
+                    int x2 = stoi(line.substr(0, line.find(','))); // get x2
+                    line = line.substr(line.find(',') + 2);        // leftover string after x2 and comma
+                    int y2 = stoi(line.substr(0, line.find(','))); // get y2
+                    line = line.substr(line.find(',') + 2);        // leftover string after y2 and comma
+                    int z2 = stoi(line.substr(0, line.find(']'))); // get z2
+                    // cout << x1 << " " << y1 << " " << z1 << " " << x2 << " " << y2 << " " << z2 << endl;
+
+                    Line3D *tempLine3D = new Line3D(Point3D(x1, y1, z1), Point3D(x2, y2, z2));
+                    if (Line3DVec.empty())
                     {
                         Line3DVec.push_back(tempLine3D);
                     }
                     else
                     {
-                        delete tempLine3D;
+                        bool exists = false;
+                        for (int i = 0; i < Line3DVec.size(); i++)
+                        {
+                            if (equals(*Line3DVec[i], *tempLine3D))
+                            {
+                                exists = true;
+                                break;
+                            }
+                        }
+                        if (!exists)
+                        {
+                            Line3DVec.push_back(tempLine3D);
+                        }
+                        else
+                        {
+                            delete tempLine3D;
+                        }
                     }
                 }
             }
@@ -240,19 +241,6 @@ void inputData()
     else
     {
         cout << "Unable to open file" << endl;
-    }
-    returnToMain();
-}
-
-void testPrint()
-{
-    for (int i = 0; i < Point2DVec.size(); i++)
-    {
-        cout << *Point2DVec[i] << endl;
-    }
-    for (int i = 0; i < Point3DVec.size(); i++)
-    {
-        cout << *Point3DVec[i] << endl;
     }
     returnToMain();
 }
@@ -284,13 +272,13 @@ void filterData()
     else if (input == "c")
     {
         filterCriteria = "Line2D";
-        sortCriteria = "pt.1"; // set default whenever filter criteria changes
+        sortCriteria = "Pt. 1"; // set default whenever filter criteria changes
         cout << "Filter criteria successfully set to 'Line2D'" << endl;
     }
     else if (input == "d")
     {
         filterCriteria = "Line3D";
-        sortCriteria = "pt.1"; // set default whenever filter criteria changes
+        sortCriteria = "Pt. 1"; // set default whenever filter criteria changes
         cout << "Filter criteria successfully set to 'Line3D'" << endl;
     }
     else
@@ -452,14 +440,46 @@ void viewData()
     {
         oss << setw(5) << right << "X" << setw(5) << right << "Y" << setw(4) << "" << "Dist. Fr Origin" << endl;
         oss << "-----------------------------------" << endl;
-        /* if (sortingOrder == "ASC")
+
+        if (sortCriteria == "x-coordinate")
         {
-            sortByAscendingX();
+            if (sortingOrder == "ASC")
+            {
+                sort(Point2DVec.begin(), Point2DVec.end(), [](Point2D *a, Point2D *b)
+                     { return a->getX() < b->getX(); });
+            }
+            else if (sortingOrder == "DSC")
+            {
+                sort(Point2DVec.begin(), Point2DVec.end(), [](Point2D *a, Point2D *b)
+                     { return a->getX() > b->getX(); });
+            }
         }
-        else if (sortingOrder == "DSC")
+        else if (sortCriteria == "y-coordinate")
         {
-            sortByDescendingX();
-        } */
+            if (sortingOrder == "ASC")
+            {
+                sort(Point2DVec.begin(), Point2DVec.end(), [](Point2D *a, Point2D *b)
+                     { return a->getY() < b->getY(); });
+            }
+            else if (sortingOrder == "DSC")
+            {
+                sort(Point2DVec.begin(), Point2DVec.end(), [](Point2D *a, Point2D *b)
+                     { return a->getY() > b->getY(); });
+            }
+        }
+        else // sort by distance from origin
+        {
+            if (sortingOrder == "ASC")
+            {
+                sort(Point2DVec.begin(), Point2DVec.end(), [](Point2D *a, Point2D *b)
+                     { return a->getScalarValue() < b->getScalarValue(); });
+            }
+            else if (sortingOrder == "DSC")
+            {
+                sort(Point2DVec.begin(), Point2DVec.end(), [](Point2D *a, Point2D *b)
+                     { return a->getScalarValue() > b->getScalarValue(); });
+            }
+        }
         for (int i = 0; i < Point2DVec.size(); i++)
         {
             oss << *Point2DVec[i] << endl;
@@ -469,6 +489,58 @@ void viewData()
     {
         oss << setw(5) << right << "X" << setw(5) << right << "Y" << setw(5) << right << "Z" << setw(4) << "" << "Dist. Fr Origin" << endl;
         oss << "-----------------------------------" << endl;
+        if (sortCriteria == "x-coordinate")
+        {
+            if (sortingOrder == "ASC")
+            {
+                sort(Point3DVec.begin(), Point3DVec.end(), [](Point3D *a, Point3D *b)
+                     { return a->getX() < b->getX(); });
+            }
+            else if (sortingOrder == "DSC")
+            {
+                sort(Point3DVec.begin(), Point3DVec.end(), [](Point3D *a, Point3D *b)
+                     { return a->getX() > b->getX(); });
+            }
+        }
+        else if (sortCriteria == "y-coordinate")
+        {
+            if (sortingOrder == "ASC")
+            {
+                sort(Point3DVec.begin(), Point3DVec.end(), [](Point3D *a, Point3D *b)
+                     { return a->getY() < b->getY(); });
+            }
+            else if (sortingOrder == "DSC")
+            {
+                sort(Point3DVec.begin(), Point3DVec.end(), [](Point3D *a, Point3D *b)
+                     { return a->getY() > b->getY(); });
+            }
+        }
+        else if (sortCriteria == "z-coordinate")
+        {
+            if (sortingOrder == "ASC")
+            {
+                sort(Point3DVec.begin(), Point3DVec.end(), [](Point3D *a, Point3D *b)
+                     { return a->getZ() < b->getZ(); });
+            }
+            else if (sortingOrder == "DSC")
+            {
+                sort(Point3DVec.begin(), Point3DVec.end(), [](Point3D *a, Point3D *b)
+                     { return a->getZ() > b->getZ(); });
+            }
+        }
+        else // sort by distance from origin
+        {
+            if (sortingOrder == "ASC")
+            {
+                sort(Point3DVec.begin(), Point3DVec.end(), [](Point3D *a, Point3D *b)
+                     { return a->getScalarValue() < b->getScalarValue(); });
+            }
+            else if (sortingOrder == "DSC")
+            {
+                sort(Point3DVec.begin(), Point3DVec.end(), [](Point3D *a, Point3D *b)
+                     { return a->getScalarValue() > b->getScalarValue(); });
+            }
+        }
         for (int i = 0; i < Point3DVec.size(); i++)
         {
             oss << *Point3DVec[i] << endl;
@@ -482,6 +554,53 @@ void viewData()
         oss << setw(4) << "";
         oss << "Length" << endl;
         oss << "-----------------------------------" << endl;
+        if (sortCriteria == "Pt. 1")
+        {
+            if (sortingOrder == "ASC")
+            {
+                sort(Line2DVec.begin(), Line2DVec.end(), [](Line2D *a, Line2D *b)
+                     { return a->getPt1().getY() < b->getPt1().getY(); });
+                sort(Line2DVec.begin(), Line2DVec.end(), [](Line2D *a, Line2D *b)
+                     { return a->getPt1().getX() < b->getPt1().getX(); });
+            }
+            else if (sortingOrder == "DSC")
+            {
+                sort(Line2DVec.begin(), Line2DVec.end(), [](Line2D *a, Line2D *b)
+                     { return a->getPt1().getY() > b->getPt1().getY();; });
+                sort(Line2DVec.begin(), Line2DVec.end(), [](Line2D *a, Line2D *b)
+                     { return a->getPt1().getX() > b->getPt1().getX(); });
+            }
+        }
+        else if (sortCriteria == "Pt. 2")
+        {
+            if (sortingOrder == "ASC")
+            {
+                sort(Line2DVec.begin(), Line2DVec.end(), [](Line2D *a, Line2D *b)
+                     { return a->getPt2().getY() < b->getPt2().getY(); });
+                sort(Line2DVec.begin(), Line2DVec.end(), [](Line2D *a, Line2D *b)
+                     { return a->getPt2().getX() < b->getPt2().getX(); });
+            }
+            else if (sortingOrder == "DSC")
+            {
+                sort(Line2DVec.begin(), Line2DVec.end(), [](Line2D *a, Line2D *b)
+                     { return a->getPt2().getY() > b->getPt2().getY();; });
+                sort(Line2DVec.begin(), Line2DVec.end(), [](Line2D *a, Line2D *b)
+                     { return a->getPt2().getX() > b->getPt2().getX(); });
+            }
+        }
+        else // sort by distance from origin
+        {
+            if (sortingOrder == "ASC")
+            {
+                sort(Line2DVec.begin(), Line2DVec.end(), [](Line2D *a, Line2D *b)
+                     { return a->getScalarValue() < b->getScalarValue(); });
+            }
+            else if (sortingOrder == "DSC")
+            {
+                sort(Line2DVec.begin(), Line2DVec.end(), [](Line2D *a, Line2D *b)
+                     { return a->getScalarValue() > b->getScalarValue(); });
+            }
+        }
         for (int i = 0; i < Line2DVec.size(); i++)
         {
             oss << *Line2DVec[i] << endl;
@@ -495,6 +614,61 @@ void viewData()
         oss << setw(4) << "";
         oss << "Length" << endl;
         oss << "-----------------------------------" << endl;
+        if (sortCriteria == "Pt. 1")
+        {
+            if (sortingOrder == "ASC")
+            {
+                sort(Line3DVec.begin(), Line3DVec.end(), [](Line3D *a, Line3D *b)
+                     { return a->getPt1().getZ() < b->getPt1().getZ(); });
+                sort(Line3DVec.begin(), Line3DVec.end(), [](Line3D *a, Line3D *b)
+                     { return a->getPt1().getY() < b->getPt1().getY(); });
+                sort(Line3DVec.begin(), Line3DVec.end(), [](Line3D *a, Line3D *b)
+                     { return a->getPt1().getX() < b->getPt1().getX(); });
+            }
+            else if (sortingOrder == "DSC")
+            {
+                sort(Line3DVec.begin(), Line3DVec.end(), [](Line3D *a, Line3D *b)
+                     { return a->getPt1().getZ() > b->getPt1().getZ(); });
+                sort(Line3DVec.begin(), Line3DVec.end(), [](Line3D *a, Line3D *b)
+                     { return a->getPt1().getY() > b->getPt1().getY();; });
+                sort(Line3DVec.begin(), Line3DVec.end(), [](Line3D *a, Line3D *b)
+                     { return a->getPt1().getX() > b->getPt1().getX(); });
+            }
+        }
+        else if (sortCriteria == "Pt. 2")
+        {
+            if (sortingOrder == "ASC")
+            {
+                sort(Line3DVec.begin(), Line3DVec.end(), [](Line3D *a, Line3D *b)
+                     { return a->getPt2().getZ() < b->getPt2().getZ(); });
+                sort(Line3DVec.begin(), Line3DVec.end(), [](Line3D *a, Line3D *b)
+                     { return a->getPt2().getY() < b->getPt2().getY(); });
+                sort(Line3DVec.begin(), Line3DVec.end(), [](Line3D *a, Line3D *b)
+                     { return a->getPt2().getX() < b->getPt2().getX(); });
+            }
+            else if (sortingOrder == "DSC")
+            {
+                sort(Line3DVec.begin(), Line3DVec.end(), [](Line3D *a, Line3D *b)
+                     { return a->getPt2().getZ() > b->getPt2().getZ(); });
+                sort(Line3DVec.begin(), Line3DVec.end(), [](Line3D *a, Line3D *b)
+                     { return a->getPt2().getY() > b->getPt2().getY();; });
+                sort(Line3DVec.begin(), Line3DVec.end(), [](Line3D *a, Line3D *b)
+                     { return a->getPt2().getX() > b->getPt2().getX(); });
+            }
+        }
+        else // sort by distance from origin
+        {
+            if (sortingOrder == "ASC")
+            {
+                sort(Line3DVec.begin(), Line3DVec.end(), [](Line3D *a, Line3D *b)
+                     { return a->getScalarValue() < b->getScalarValue(); });
+            }
+            else if (sortingOrder == "DSC")
+            {
+                sort(Line3DVec.begin(), Line3DVec.end(), [](Line3D *a, Line3D *b)
+                     { return a->getScalarValue() > b->getScalarValue(); });
+            }
+        }
         for (int i = 0; i < Line3DVec.size(); i++)
         {
             oss << *Line3DVec[i] << endl;
@@ -528,17 +702,6 @@ void quitProgram()
     cout << "Quitting program" << endl;
     exit(0);
 }
-
-/* void sortByDescendingX()
-{
-    sort(Point2DVec.begin(), Point2DVec.end(), [](Point2D *a, Point2D *b)
-         { return a->getX() > b->getX(); });
-}
-void sortByAscendingX()
-{
-    sort(Point2DVec.begin(), Point2DVec.end(), [](Point2D *a, Point2D *b)
-         { return a->getX() < b->getX(); });
-} */
 
 int main()
 {
