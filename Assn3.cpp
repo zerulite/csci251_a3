@@ -316,7 +316,7 @@ void sortData()
         }
         else if (input == "c")
         {
-            sortCriteria = "Length";
+            sortCriteria = "Dist. Fr. Origin";
             cout << "Sorting criteria successfully set to 'distance from origin'" << endl;
         }
         else
@@ -355,7 +355,7 @@ void sortData()
         }
         else if (input == "d")
         {
-            sortCriteria = "Length";
+            sortCriteria = "Dist. Fr. Origin";
             cout << "Sorting criteria successfully set to 'distance from origin'" << endl;
         }
         else
