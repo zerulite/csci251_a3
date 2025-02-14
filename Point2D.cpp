@@ -53,3 +53,8 @@ ostream &operator<<(ostream &os, Point2D &point)
     os << setw(3) << "" << point.getScalarValue();
     return os;
 }
+
+bool operator==(Point2D &a, Point2D &b)
+{
+    return a.getX() == b.getX() && a.getY() == b.getY();
+}

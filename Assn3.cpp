@@ -67,6 +67,12 @@ void userStartInput()
     }
 }
 
+template <typename T>
+bool equals(const T &a, const T &b)
+{
+    return a == b;
+}
+
 void inputData()
 {
     string fileName;
@@ -89,7 +95,26 @@ void inputData()
                 line = line.substr(line.find(',') + 2); // leftover string after x and comma
                 int y = stoi(line.substr(0, line.find(']')));
                 // cout << x << " " << y << endl;
-                Point2DVec.push_back(new Point2D(x, y));
+
+                Point2D *tempPoint2D = new Point2D(x, y);
+                if (Point2DVec.empty())
+                {
+                    Point2DVec.push_back(tempPoint2D);
+                }
+                else
+                {
+                    for (int i = 0; i < Point2DVec.size(); i++)
+                    {
+                        if (equals(Point2DVec[i], tempPoint2D))
+                        {
+                            Point2DVec.push_back(tempPoint2D);
+                        }
+                        else
+                        {
+                            cout << "Point2D already exists" << endl;
+                        }
+                    }
+                }
             }
             else if (type == "Point3D")
             {
