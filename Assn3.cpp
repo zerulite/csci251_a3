@@ -50,9 +50,9 @@ void userStartInput()
     case 5:
         viewData();
         break;
-    /* case 6:
+    case 6:
         storeData();
-        break; */
+        break;
     case 7:
         quitProgram();
         break;
@@ -679,6 +679,45 @@ void viewData()
         oss << "Invalid filter criteria" << endl;
     }
     cout << oss.str();
+    fileOutputString = oss.str();
+    returnToMain();
+}
+
+void storeData()
+{
+    int vectorsize;
+    if (filterCriteria == "Point2D")
+    {
+        vectorsize = Point2DVec.size();
+    }
+    else if (filterCriteria == "Point3D")
+    {
+        vectorsize = Point3DVec.size();
+    }
+    else if (filterCriteria == "Line2D")
+    {
+        vectorsize = Line2DVec.size();
+    }
+    else if (filterCriteria == "Line3D")
+    {
+        vectorsize = Line3DVec.size();
+    }
+    string outputFileName;
+    cout << "Store data" << endl;
+    cout << "Please enter filename: ";
+    cin >> outputFileName;
+
+    ofstream outputFile(outputFileName);
+    if (outputFile.is_open())
+    {
+        outputFile << fileOutputString;
+        outputFile.close();
+        cout << vectorsize << " records output successfully" << endl;
+    }
+    else
+    {
+        cout << "Unable to open file for writing" << endl;
+    }
     returnToMain();
 }
 
@@ -699,7 +738,6 @@ void quitProgram()
     Point3DVec.clear();
     Line2DVec.clear();
     Line3DVec.clear();
-    cout << "Quitting program" << endl;
     exit(0);
 }
 

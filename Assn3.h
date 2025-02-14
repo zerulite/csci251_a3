@@ -18,6 +18,7 @@ using namespace std;
 string filterCriteria = "Point2D";
 string sortCriteria = "x-coordinate";
 string sortingOrder = "ASC";
+string fileOutputString;
 
 void printStartPage();
 void userStartInput();
@@ -27,5 +28,5 @@ void filterData();
 void sortData();
 void sortDataOrder();
 void viewData();
-// void storeData();
+void storeData();
 void quitProgram();
